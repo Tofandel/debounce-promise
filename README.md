@@ -80,16 +80,10 @@ var saveCycles = debounce(expensiveOperation, 100, {leading: true, trailing: fal
     console.log(value)
   })
 })
-setTimeout(() => {
-  saveCycles('call no #' + num).then(value => {
-    console.log(value)
-  })
-}, 110)
 
 //=> call no #1
 //=> call no #1
 //=> call no #1
-//=> call no #4
 ```
 
 ### With accumulate=true
@@ -116,12 +110,13 @@ var square = debounce(squareValues, 100, {accumulate: true});
 ```
 
 ## Api
-`debounce(func, [wait=0], [{leading: true|false, accumulate: true|false})`
+`debounce(func, [wait=0], [{leading: true|false, trailing: true|false, accumulate: true|false})`
 
 Returns a debounced version of `func` that delays invoking until after `wait` milliseconds.
 
-Set `leading: true` if you
-want to call `func` and return its promise immediately.
+Set `leading: true` if you want to call `func` and return its promise immediately.
+
+Set `trailing: false` if you don't want the original function to be called at the end after you called the debounced function and the `wait` time elapsed 
 
 Set `accumulate: true` if you want the debounced function to be called with an array of all the arguments received while waiting.
 
