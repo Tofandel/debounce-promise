@@ -95,6 +95,7 @@ tap.test('waits until the wait time has passed', async t => {
 tap.test('clear', async t => {
   let callCount = 0
   const debounced = debounce(async () => callCount++, 10)
+  debounced.clear()
   debounced()
   debounced.clear()
   t.equal(callCount, 0)
