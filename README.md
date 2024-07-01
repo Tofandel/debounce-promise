@@ -69,7 +69,7 @@ function expensiveOperation(value) {
   return Promise.resolve(value)
 }
 
-var saveCycles = debounce(expensiveOperation, 100, {leading: true});
+var saveCycles = debounce(expensiveOperation, 100, {leading: true, trailing: false});
 
 [1, 2, 3].forEach(num => {
   return saveCycles('call no #' + num).then(value => {
