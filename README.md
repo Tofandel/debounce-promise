@@ -1,7 +1,11 @@
 # @tofandel/debounce-promise
 
-[![Build Status](https://travis-ci.org/tofandel/@tofandel/debounce-promise.svg)](https://travis-ci.org/tofandel/@tofandel/debounce-promise)
-[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
+
+[![test](https://img.shields.io/github/actions/workflow/status/Tofandel/debounce-promise/tests.yml?label=Tests)](https://github.com/Tofandel/debounce-promise/actions/workflows/tests.yml)
+[![npm downloads](https://img.shields.io/npm/dt/@tofandel/debounce-promise.svg)](https://www.npmjs.com/package/@tofandel/debounce-promise)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://standardjs.com/)
+[![license](https://img.shields.io/github/license/Tofandel/debounce-promise.svg)](https://github.com/Tofandel/debounce-promise/blob/master/LICENSE.md)
 
 [![NPM](https://nodei.co/npm/@tofandel/debounce-promise.png)](https://nodei.co/npm/@tofandel/debounce-promise/)
 
