@@ -18,21 +18,21 @@ function debounce<
 	fn: FunctionType,
 	wait?: Wait,
 	opts?: Options & { accumulate: true },
-):
-	{ flush: () => void; clear: () => void }
-	& (() => Promise<Awaited<ReturnType<FunctionType>>[0]>)
+): { flush: () => void; clear: () => void } & (() => Promise<
+	Awaited<ReturnType<FunctionType>>[0]
+>);
 
 function debounce<
-	FunctionType extends (args: unknown[]) => Array<unknown> | Promise<Array<unknown>>,
+	FunctionType extends (
+		args: unknown[],
+	) => Array<unknown> | Promise<Array<unknown>>,
 >(
 	fn: FunctionType,
 	wait?: Wait,
 	opts?: Options & { accumulate: true },
-):
-	{ flush: () => void; clear: () => void }
-	& ((
-	args: Parameters<FunctionType>[0][0]
-) => Promise<Awaited<ReturnType<FunctionType>>[0]>)
+): { flush: () => void; clear: () => void } & ((
+	args: Parameters<FunctionType>[0][0],
+) => Promise<Awaited<ReturnType<FunctionType>>[0]>);
 
 function debounce<
 	FunctionType extends (...args: unknown[]) => unknown | Promise<unknown>,
@@ -40,11 +40,9 @@ function debounce<
 	fn: FunctionType,
 	wait?: Wait,
 	opts?: Options & { accumulate?: false },
-):
-	{ flush: () => void; clear: () => void }
-	& ((
+): { flush: () => void; clear: () => void } & ((
 	...args: Parameters<FunctionType>
-) => Promise<Awaited<ReturnType<FunctionType>>>)
+) => Promise<Awaited<ReturnType<FunctionType>>>);
 
 function debounce<
 	FunctionType extends (...args: unknown[]) => unknown | Promise<unknown>,
@@ -52,11 +50,9 @@ function debounce<
 	fn: FunctionType,
 	wait: Wait = 0,
 	opts: Options = {},
-):
-	{ flush: () => void; clear: () => void }
-	& ((
-			...args: Parameters<FunctionType>
-	  ) => Promise<Awaited<ReturnType<FunctionType>>>) {
+): { flush: () => void; clear: () => void } & ((
+	...args: Parameters<FunctionType>
+) => Promise<Awaited<ReturnType<FunctionType>>>) {
 	let lastCallAt: number;
 	let deferred: Deferred<
 		ReturnType<FunctionType> | Array<ReturnType<FunctionType>>

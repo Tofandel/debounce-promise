@@ -273,10 +273,11 @@ tap.test("accumulate works with non-promise return value", async (t) => {
 
 tap.test("nesting call", async (t) => {
 	const debounced = debounce(
-		 (a1, a2) => shouldIterate ? callIterate(a1, a2) : Promise.resolve([a1, a2]),
-				10,
-				{leading: false}
-	)
+		(a1, a2) =>
+			shouldIterate ? callIterate(a1, a2) : Promise.resolve([a1, a2]),
+		10,
+		{ leading: false },
+	);
 
 	let shouldIterate = true;
 	let deb2: Promise<unknown> | null = null;
@@ -287,11 +288,11 @@ tap.test("nesting call", async (t) => {
 			deb2 = debounced(3, 4).then((r) => t.same(r, [3, 4]));
 		}, 15);
 
-		return Promise.resolve([a1, a2])
+		return Promise.resolve([a1, a2]);
 	};
 
 	const test = await debounced(1, 2);
-	t.same(test, [1,2]);
+	t.same(test, [1, 2]);
 
 	await sleep(15);
 	await deb2;
@@ -310,14 +311,15 @@ tap.test("typescript type inference", async (t) => {
 	ty2 satisfies string;
 	t.equal(ty2, "abc");
 
-	const deb3 = debounce(() => Promise.resolve(["abc"]), 10, {accumulate: true});
+	const deb3 = debounce(() => Promise.resolve(["abc"]), 10, {
+		accumulate: true,
+	});
 
 	await deb3();
 
-
 	const deb4 = debounce((abc: string, def: number) => abc + def);
 
-	const ty4 = await deb4('abc', 2);
+	const ty4 = await deb4("abc", 2);
 	ty4 satisfies string;
 	t.equal(ty4, "abc2");
-})
+});

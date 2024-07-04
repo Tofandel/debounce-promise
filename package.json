@@ -3,10 +3,7 @@
 	"version": "5.0.2",
 	"description": "Create a debounced version of a promise returning function",
 	"main": "index.js",
-	"files": [
-		"index.js",
-		"index.d.ts"
-	],
+	"files": ["index.js", "index.d.ts"],
 	"types": "index.d.ts",
 	"type": "module",
 	"scripts": {
