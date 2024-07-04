@@ -37,7 +37,7 @@ function debounce<
 
 function debounce<
 	FunctionType extends (...args: ArgsType) => unknown | Promise<unknown>,
-	ArgsType extends unknown[],
+	ArgsType extends any[],
 >(
 	fn: FunctionType,
 	wait?: Wait,
