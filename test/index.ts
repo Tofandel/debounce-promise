@@ -315,11 +315,23 @@ tap.test("typescript type inference", async (t) => {
 		accumulate: true,
 	});
 
-	await deb3();
+	const ty3 = await deb3();
+	ty3 satisfies string;
 
 	const deb4 = debounce((abc: string, def: number) => abc + def);
 
 	const ty4 = await deb4("abc", 2);
 	ty4 satisfies string;
 	t.equal(ty4, "abc2");
+
+
+	const deb5 = debounce((args: number[]) => args.map(() => args[0] * args[1]), 10, {
+		accumulate: true,
+	});
+
+	deb5(2);
+	const ty5 = await deb5(3);
+	ty5 satisfies number;
+	t.equal(ty5, 6);
+
 });

@@ -24,34 +24,37 @@ function debounce<
 
 function debounce<
 	FunctionType extends (
-		args: unknown[],
+		args: ArgsType[],
 	) => Array<unknown> | Promise<Array<unknown>>,
+	ArgsType,
 >(
 	fn: FunctionType,
 	wait?: Wait,
 	opts?: Options & { accumulate: true },
 ): { flush: () => void; clear: () => void } & ((
-	args: Parameters<FunctionType>[0][0],
+	args: ArgsType,
 ) => Promise<Awaited<ReturnType<FunctionType>>[0]>);
 
 function debounce<
-	FunctionType extends (...args: unknown[]) => unknown | Promise<unknown>,
+	FunctionType extends (...args: ArgsType) => unknown | Promise<unknown>,
+	ArgsType extends unknown[],
 >(
 	fn: FunctionType,
 	wait?: Wait,
 	opts?: Options & { accumulate?: false },
 ): { flush: () => void; clear: () => void } & ((
-	...args: Parameters<FunctionType>
+	...args: ArgsType
 ) => Promise<Awaited<ReturnType<FunctionType>>>);
 
 function debounce<
-	FunctionType extends (...args: unknown[]) => unknown | Promise<unknown>,
+	FunctionType extends (...args: ArgsType) => unknown | Promise<unknown>,
+	ArgsType extends unknown[],
 >(
 	fn: FunctionType,
 	wait: Wait = 0,
 	opts: Options = {},
 ): { flush: () => void; clear: () => void } & ((
-	...args: Parameters<FunctionType>
+	...args: ArgsType
 ) => Promise<Awaited<ReturnType<FunctionType>>>) {
 	let lastCallAt: number;
 	let deferred: Deferred<
