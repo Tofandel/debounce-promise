@@ -2,7 +2,6 @@ index.js
 index.d.ts
 node_modules
 npm-debug.log
-package-lock.json
 .idea
 .nyc_output
 .tap
