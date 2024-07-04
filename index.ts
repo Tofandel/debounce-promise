@@ -13,6 +13,16 @@ interface Deferred<PromiseReturn> {
 type Wait = number | (() => number);
 
 function debounce<
+	FunctionType extends () => Array<unknown> | Promise<Array<unknown>>,
+>(
+	fn: FunctionType,
+	wait?: Wait,
+	opts?: Options & { accumulate: true },
+):
+	{ flush: () => void; clear: () => void }
+	& (() => Promise<Awaited<ReturnType<FunctionType>>[0]>)
+
+function debounce<
 	FunctionType extends (args: unknown[]) => Array<unknown> | Promise<Array<unknown>>,
 >(
 	fn: FunctionType,
@@ -21,7 +31,7 @@ function debounce<
 ):
 	{ flush: () => void; clear: () => void }
 	& ((
-	...args: Parameters<FunctionType>[0]
+	args: Parameters<FunctionType>[0][0]
 ) => Promise<Awaited<ReturnType<FunctionType>>[0]>)
 
 function debounce<
@@ -50,7 +60,7 @@ function debounce<
 	let lastCallAt: number;
 	let deferred: Deferred<
 		ReturnType<FunctionType> | Array<ReturnType<FunctionType>>
-	> | null;
+	> | null = null;
 	let firstPromise: Promise<Awaited<ReturnType<FunctionType>>>;
 	let timer: NodeJS.Timeout;
 	let pendingArgs: unknown[] = [];
@@ -79,7 +89,7 @@ function debounce<
 			return firstPromise;
 		}
 
-		if (deferred != null) {
+		if (deferred !== null) {
 			clearTimeout(timer);
 		} else {
 			deferred = defer();
@@ -114,15 +124,14 @@ function debounce<
 	function flush(): void {
 		clearTimeout(timer);
 
-		const p = Promise.resolve(
+		if (deferred === null) {
+			deferred = defer();
+		}
+		Promise.resolve(
 			options.accumulate
 				? fn.call(this, pendingArgs)
 				: fn.apply(this, pendingArgs[pendingArgs.length - 1]),
-		);
-		console.log(deferred)
-		if (deferred != null) {
-			p.then(deferred.resolve, deferred.reject);
-		}
+		).then(deferred.resolve, deferred.reject);
 
 		pendingArgs = [];
 		deferred = null;
