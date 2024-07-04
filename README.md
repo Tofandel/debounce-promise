@@ -19,8 +19,7 @@ Create a debounced version of a promise returning function
 ## Usage example
 
 ```js
-
-var debounce = require('@tofandel/debounce-promise')
+import debounce from '@tofandel/debounce-promise';
 
 function expensiveOperation(value) {
   return Promise.resolve(value)
@@ -44,7 +43,7 @@ var saveCycles = debounce(expensiveOperation, 100);
 ### With leading=true
 
 ```js
-var debounce = require('@tofandel/debounce-promise')
+import debounce from '@tofandel/debounce-promise';
 
 function expensiveOperation(value) {
   return Promise.resolve(value)
@@ -67,7 +66,7 @@ var saveCycles = debounce(expensiveOperation, 100, {leading: true});
 ### With leading=true and trailing=false
 
 ```js
-var debounce = require('@tofandel/debounce-promise')
+import debounce from '@tofandel/debounce-promise';
 
 function expensiveOperation(value) {
   return Promise.resolve(value)
@@ -89,7 +88,7 @@ var saveCycles = debounce(expensiveOperation, 100, {leading: true, trailing: fal
 ### With accumulate=true
 
 ```js
-var debounce = require('@tofandel/debounce-promise')
+import debounce from '@tofandel/debounce-promise';
 
 function squareValues (argTuples) {
   return Promise.all(argTuples.map(args => args[0] * args[0]))
