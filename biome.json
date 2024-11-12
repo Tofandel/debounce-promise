@@ -4,7 +4,7 @@
 		"enabled": true
 	},
 	"files": {
-		"ignore": ["index.js", "index.d.ts"]
+		"ignore": ["index.js", "index.d.ts", "index.cjs"]
 	},
 	"linter": {
 		"enabled": true,

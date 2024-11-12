@@ -37,7 +37,7 @@ function debounce<
 
 function debounce<
 	FunctionType extends (...args: ArgsType) => unknown | Promise<unknown>,
-	ArgsType extends unknown[],
+	ArgsType extends Array<unknown>,
 >(
 	fn: FunctionType,
 	wait?: Wait,
@@ -48,7 +48,7 @@ function debounce<
 
 function debounce<
 	FunctionType extends (...args: ArgsType) => unknown | Promise<unknown>,
-	ArgsType extends unknown[],
+	ArgsType extends Array<unknown>,
 >(
 	fn: FunctionType,
 	wait: Wait = 0,
@@ -155,4 +155,5 @@ function defer<ReturnType>(): Deferred<ReturnType> {
 	return deferred as Deferred<ReturnType>;
 }
 
+module.exports = debounce;
 export default debounce;
