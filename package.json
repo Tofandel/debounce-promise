@@ -7,6 +7,13 @@
 		"index.js",
 		"index.d.ts"
 	],
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"default": "./index.js",
+			"require": "./index.cjs"
+		}
+	},
 	"types": "index.d.ts",
 	"type": "module",
 	"scripts": {
@@ -14,7 +21,7 @@
 		"lint": "npx @biomejs/biome lint .",
 		"lint:fix": "npx @biomejs/biome lint --write --unsafe .",
 		"format": "npx @biomejs/biome format --write .",
-		"build": "tsc index.ts --declaration",
+		"build": "tsc --declaration && mv -f index.d.cts index.d.ts",
 		"clean": "rimraf dist",
 		"prepublishOnly": "npm run build"
 	},
@@ -37,13 +44,12 @@
 	},
 	"homepage": "https://github.com/tofandel/debounce-promise",
 	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
-		"@typescript-eslint/utils": "^7.15.0",
-		"eslint": "^8.57.0",
-		"eslint-config-love": "^53.0.0",
-		"rimraf": "^5.0.7",
-		"tap": "^20.0.3",
-		"typescript": "^5.5.3",
-		"typescript-eslint": "^7.15.0"
+		"@biomejs/biome": "1.9.4",
+		"rimraf": "^5.0.10",
+		"tap": "^21.0.1",
+		"typescript": "^5.6.3",
+		"typescript-eslint": "^8.14.0",
+		"@types/node": "^22.9.0",
+		"undici-types": "^6.20.0"
 	}
 }
