@@ -10,13 +10,13 @@
 		"index.d.cts"
 	],
 	"exports": {
-		"default": {
-			"types": "./index.d.ts",
-			"default": "./index.js"
-		},
 		"require": {
 			"types": "./index.d.cts",
 			"default": "./index.cjs"
+		},
+		"default": {
+			"types": "./index.d.ts",
+			"default": "./index.js"
 		}
 	},
 	"types": "index.d.ts",
