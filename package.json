@@ -6,13 +6,17 @@
 	"files": [
 		"index.js",
 		"index.cjs",
-		"index.d.ts"
+		"index.d.ts",
+		"index.d.cts"
 	],
 	"exports": {
-		".": {
+		"default": {
 			"types": "./index.d.ts",
-			"require": "./index.cjs",
 			"default": "./index.js"
+		},
+		"require": {
+			"types": "./index.d.cts",
+			"default": "./index.cjs"
 		}
 	},
 	"types": "index.d.ts",
@@ -22,7 +26,7 @@
 		"lint": "npx @biomejs/biome lint .",
 		"lint:fix": "npx @biomejs/biome lint --write --unsafe .",
 		"format": "npx @biomejs/biome format --write .",
-		"build": "rm -f index.d.cts && tsc -p tsconfig.build.json --declaration && mv -f index.d.cts index.d.ts",
+		"build": "rm -f index.d.cts && tsc -p tsconfig.build.json --declaration && cp index.d.cts index.d.ts",
 		"clean": "rimraf dist",
 		"prepublishOnly": "npm run build"
 	},
