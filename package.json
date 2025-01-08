@@ -1,6 +1,6 @@
 {
 	"name": "@tofandel/debounce-promise",
-	"version": "5.1.5",
+	"version": "5.1.6",
 	"description": "Create a debounced version of a promise returning function",
 	"main": "index.js",
 	"files": [
