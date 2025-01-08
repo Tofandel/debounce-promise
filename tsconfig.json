@@ -9,8 +9,7 @@
 		"target": "ESNext",
 		"module": "NodeNext",
 		"strictNullChecks": true,
-		"esModuleInterop": true,
-		"allowImportingTsExtensions": true,
+		"esModuleInterop": false,
 		"noEmit": true
 	},
 	"include": ["**/*.ts", "*.cts"],

@@ -1,4 +1,4 @@
-const debounce = require("debounce-promise");
+import debounce from "@tofandel/debounce-promise";
 
 function expensiveOperation(value) {
 	return Promise.resolve(value);

@@ -1,5 +1,5 @@
 import tap from "tap";
-import debounce from "../index.ts";
+import debounce from "../index.js";
 
 async function sleep(ms: number): Promise<void> {
 	await new Promise((resolve) => setTimeout(resolve, ms));
