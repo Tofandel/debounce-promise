@@ -5,14 +5,14 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"index.cjs",
+		"main.cjs",
 		"index.d.ts",
-		"index.d.cts"
+		"main.d.cts"
 	],
 	"exports": {
 		"require": {
-			"types": "./index.d.cts",
-			"default": "./index.cjs"
+			"types": "./main.d.cts",
+			"default": "./main.cjs"
 		},
 		"default": {
 			"types": "./index.d.ts",
@@ -22,11 +22,11 @@
 	"types": "index.d.ts",
 	"type": "module",
 	"scripts": {
-		"test": "tap && npm run lint",
+		"test": "npm run build && tap && npm run lint",
 		"lint": "npx @biomejs/biome lint .",
 		"lint:fix": "npx @biomejs/biome lint --write --unsafe .",
 		"format": "npx @biomejs/biome format --write .",
-		"build": "rm -f index.d.cts index.d.ts index.cjs index.js && tsc -p tsconfig.build.json --declaration && tsc -p tsconfig.build.esm.json --declaration",
+		"build": "cp index.cts index.ts && rm -f index.d.cts index.d.ts index.cjs index.js && tsc -p tsconfig.build.json --declaration && tsc -p tsconfig.build.esm.json --declaration",
 		"clean": "rimraf dist",
 		"prepublishOnly": "npm run build"
 	},

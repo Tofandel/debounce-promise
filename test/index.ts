@@ -1,5 +1,5 @@
 import tap from "tap";
-import debounce from "../index.js";
+import debounce from "@tofandel/debounce-promise";
 
 async function sleep(ms: number): Promise<void> {
 	await new Promise((resolve) => setTimeout(resolve, ms));
@@ -108,13 +108,22 @@ tap.test("waits until the wait time has passed", async (t) => {
 
 tap.test("clear", async (t) => {
 	let callCount = 0;
-	const debounced = debounce(async () => callCount++, 10);
+	const debounced = debounce(async () => callCount++, 10, {trailing: true});
 	debounced.clear();
 	debounced();
 	debounced.clear();
 	t.equal(callCount, 0);
 	await sleep(20);
 	t.equal(callCount, 0);
+});
+
+
+tap.test("clearing while flushing", async (t) => {
+	let callCount = 0;
+	const debounced = debounce(async () => callCount++ && debounced.clear(), 10, {trailing: true});
+	debounced();
+	await sleep(20);
+	t.equal(callCount, 1);
 });
 
 tap.test("supports passing function as wait parameter", async (t) => {

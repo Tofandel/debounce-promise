@@ -123,14 +123,14 @@ function debounce<
 	function flush(): void {
 		clearTimeout(timer);
 
+		const res = options.accumulate
+				? fn.call(this, pendingArgs)
+				: fn.apply(this, pendingArgs[pendingArgs.length - 1])
+
 		if (deferred === null) {
 			deferred = defer();
 		}
-		Promise.resolve(
-			options.accumulate
-				? fn.call(this, pendingArgs)
-				: fn.apply(this, pendingArgs[pendingArgs.length - 1]),
-		).then(deferred.resolve, deferred.reject);
+		Promise.resolve(res).then(deferred.resolve, deferred.reject);
 
 		pendingArgs = [];
 		deferred = null;
