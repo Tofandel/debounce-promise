@@ -5,14 +5,14 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"main.cjs",
+		"index.cjs",
 		"index.d.ts",
-		"main.d.cts"
+		"index.d.cts"
 	],
 	"exports": {
 		"require": {
-			"types": "./main.d.cts",
-			"default": "./main.cjs"
+			"types": "./index.d.cts",
+			"default": "./index.cjs"
 		},
 		"default": {
 			"types": "./index.d.ts",
