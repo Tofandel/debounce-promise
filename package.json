@@ -26,7 +26,7 @@
 		"lint": "npx @biomejs/biome lint .",
 		"lint:fix": "npx @biomejs/biome lint --write --unsafe .",
 		"format": "npx @biomejs/biome format --write .",
-		"build": "cp index.cts index.ts && rm -f index.d.cts index.d.ts index.cjs index.js && tsc -p tsconfig.build.json --declaration && tsc -p tsconfig.build.esm.json --declaration",
+		"build": "cp index.cts index.ts && sed -i 's/module\\.exports =/export default/g' index.ts && rm -f index.d.cts index.d.ts index.cjs index.js && tsc -p tsconfig.build.json --declaration && tsc -p tsconfig.build.esm.json --declaration",
 		"clean": "rimraf dist",
 		"prepublishOnly": "npm run build"
 	},

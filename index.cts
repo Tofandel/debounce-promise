@@ -155,4 +155,4 @@ function defer<ReturnType>(): Deferred<ReturnType> {
 	return deferred as Deferred<ReturnType>;
 }
 
-export default debounce;
+module.exports = debounce;
