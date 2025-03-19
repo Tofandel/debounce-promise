@@ -13,11 +13,22 @@ interface Deferred<PromiseReturn> {
 type Wait = number | (() => number);
 
 function debounce<
-	FunctionType extends () => Array<unknown> | Promise<Array<unknown>>,
+	ArgType,
+	FunctionType extends (...args: ArgType[]) => unknown | Promise<unknown>,
 >(
 	fn: FunctionType,
 	wait?: Wait,
-	opts?: Options & { accumulate: true },
+	opts?: Options & { accumulate?: false },
+): { flush: () => void; clear: () => void } & ((
+	...args: ArgType[]
+) => Promise<Awaited<ReturnType<FunctionType>>>);
+
+function debounce<
+	FunctionType extends () => Array<unknown> | Promise<Array<unknown>>,
+>(
+	fn: FunctionType,
+	wait: Wait,
+	opts: Omit<Options, 'accumulate'> & { accumulate: true },
 ): { flush: () => void; clear: () => void } & (() => Promise<
 	Awaited<ReturnType<FunctionType>>[0]
 >);
@@ -29,22 +40,11 @@ function debounce<
 	) => Array<unknown> | Promise<Array<unknown>>,
 >(
 	fn: FunctionType,
-	wait?: Wait,
-	opts?: Options & { accumulate: true },
+	wait: Wait,
+	opts: Omit<Options, 'accumulate'> & { accumulate: true },
 ): { flush: () => void; clear: () => void } & ((
 	args: ArgsType,
 ) => Promise<Awaited<ReturnType<FunctionType>>[0]>);
-
-function debounce<
-	ArgType,
-	FunctionType extends (...args: ArgType[]) => unknown | Promise<unknown>,
->(
-	fn: FunctionType,
-	wait?: Wait,
-	opts?: Options & { accumulate?: false },
-): { flush: () => void; clear: () => void } & ((
-	...args: ArgType[]
-) => Promise<Awaited<ReturnType<FunctionType>>>);
 
 function debounce<
 	ArgType,
