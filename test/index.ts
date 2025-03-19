@@ -343,4 +343,10 @@ tap.test("typescript type inference", async (t) => {
 	ty5 satisfies number;
 	t.equal(ty5, 6);
 
+	const deb6 = debounce((abc: number) => abc);
+
+	const ty6 = await deb6(2);
+	ty6 satisfies number;
+	t.equal(ty6, 2);
+
 });
